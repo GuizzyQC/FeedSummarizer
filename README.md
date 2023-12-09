@@ -11,10 +11,12 @@ Caution: Tested with Oobabooga's text-generation-webui, not tested with another 
 
 ## Requirements:
 Python 3
+
 Libraries: requests, feedparser and BeautifulSoup4
 
 ## Installation:
 git clone https://github.com/GuizzyQC/FeedSummarizer
+
 pip install -r FeedSummarizer/requirements.txt
 
 ## Configuration:
