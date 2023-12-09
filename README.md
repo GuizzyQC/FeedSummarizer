@@ -21,21 +21,37 @@ pip install -r FeedSummarizer/requirements.txt
 The software is configured using environmental variables. You can either supply them to your command before launching it or save them in your command line shell's profile.
 
 Here's what the environmental variables are and do:
+
 OPENAI_API_BASE: **REQUIRED** Sets your API's endpoint. Defaults to "https://api.openai.com/v1". Note that I have never tested this with openai, it holds no interest for me. But in theory it should probably be compatible if you supply an API key.
+
 OPENAI_API_KEY: Sets your API key.
+
 OPENAI_API_ENFORCE_MODEL: Choose "y" or "n" to define whether you want the software to force the API endpoint to use another model than is currently running on it, useful for text-generation-webui which exposes multiple possible models. Defaults to "n".
+
 OPENAI_API_SUMMARIZER: Sets the model used by your endpoint of you set y to OPENAI_API_ENFORCE_MODEL, useful for text-generation-webui which exposes multiple possible models.
+
 OPENAI_API_PRESET: Sets the preset used by your endpoint, provided you are enforcing the model. Useful for text-generation-webui which exposes multiple possible presets. Defaults to "Divine Intellect"
+
 OPENAI_API_SYSTEM: Sets the "system" prompt used in "instruct" mode. Defaults to a boring but multipurpose: "You are a helpful assistant, answer any request from the user."
+
 OPENAI_API_INSTRUCTION: Sets the prompt to follow the article's scraped text, ideally an instruction to tell the LLM to summarize the text. Defaults to "Summarize this article".
+
 FEEDSUMMARIZER_MAX_ARTICLES: Sets the maximum number of articles to fetch from each feed. Defaults to 20.
+
 FEEDSUMMARIZER_TIME_LAPSE: Sets the time in seconds between now and the oldest article to fetch. Defaults to 86400, which is a day.
+
 SMTP_SERVER: Sets the SMTP server to contact to send the email. It is assumed the server has to support SSL. I tested it on FastMail and it worked well. Without this, the script will just output the result to the shell.
+
 SMTP_PORT: Sets the port for the SMTP connection. Defaults to 465.
+
 SMTP_USER: Sets the username for SMTP authentication.
+
 SMTP_PASSWORD: Sets the password for SMTP authentication.
+
 SMTP_SENDER: Sets the sender email address for the summary.
+
 SMTP_RECIPIENT: Sets the email address to send the summary too.
+
 PYPROMPT_PRINTER: If you are the lucky owner of a DevTerm, setting "y" here will enable printouts on the thermal printer. Defaults to "n".
 
 Setting variables in Bash can be done with the command:
