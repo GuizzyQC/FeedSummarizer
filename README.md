@@ -30,7 +30,7 @@ OPENAI_API_KEY: Sets your API key.
 
 OPENAI_API_ENFORCE_MODEL: Choose "y" or "n" to define whether you want the software to force the API endpoint to use another model than is currently running on it, useful for text-generation-webui which exposes multiple possible models. Defaults to "n".
 
-OPENAI_API_SUMMARIZER: Sets the model used by your endpoint of you set y to OPENAI_API_ENFORCE_MODEL, useful for text-generation-webui which exposes multiple possible models.
+OPENAI_API_SUMMARIZER: Sets the model used by your endpoint provided you are enforcing the model with OPENAI_API_ENFORCE_MODEL, useful for text-generation-webui which exposes multiple possible models.
 
 OPENAI_API_PRESET: Sets the preset used by your endpoint, provided you are enforcing the model. Useful for text-generation-webui which exposes multiple possible presets. Defaults to "Divine Intellect"
 
