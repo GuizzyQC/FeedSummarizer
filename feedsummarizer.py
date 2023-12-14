@@ -243,14 +243,17 @@ def get_page(url, max_text_length):
 def create_text(articles, settings):
     textarray = []
     for item in articles:
-        textarray.append("Summarizing: " + item.title + "\n")
-        textarray.append("By: " + item.author + "\n")
-        textarray.append("Link : " + item.url + "\n")
-        textarray.append("Date : " + item.date + "\n")
-        output_result("Sending text of " + item.title + " to " + str(settings['url']))
-        summary = item.summarize(settings)
-        textarray.append(summary + "\n")
-        textarray.append("\n#####\n\n")
+        try:
+            textarray.append("Summarizing: \"" + item.title + "\"\n")
+            textarray.append("By: " + item.author + "\n")
+            textarray.append("Link : " + item.url + "\n")
+            textarray.append("Date : " + item.date + "\n")
+            output_result("Sending text of \"" + item.title + "\" to " + str(settings['url']))
+            summary = item.summarize(settings)
+            textarray.append(summary + "\n")
+            textarray.append("\n#####\n\n")
+        except:
+            pass
     text = ''.join(textarray)
     text = text.replace("</s>", "")
     return text
@@ -283,8 +286,11 @@ for arg in sys.argv[1:]:
 
     # Send the block of text by email if the SMTP_SERVER variable was set
     if settings['smtp'] != "":
-        with SSLSMTP(settings['username'], settings['password'], settings['smtp'], settings['port']) as server:
-            server.send_message(from_addr=settings['sender'],
-                                to_addrs=settings['recipient'],
-                                msg=text,
-                                subject="Summary of " + feedtitle + " for " + str(prettytime))
+        try:
+            with SSLSMTP(settings['username'], settings['password'], settings['smtp'], settings['port']) as server:
+                server.send_message(from_addr=settings['sender'],
+                                    to_addrs=settings['recipient'],
+                                    msg=text,
+                                    subject="Summary of " + feedtitle + " for " + str(prettytime))
+        except:
+            pass
