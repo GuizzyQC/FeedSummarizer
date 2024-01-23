@@ -34,6 +34,7 @@ default['password'] = os.environ.get("FEEDSUMMARIZER_SMTP_PASSWORD") or ""
 default['sender'] = os.environ.get("FEEDSUMMARIZER_SMTP_SENDER") or "no-reply@null.com"
 default['recipient'] = os.environ.get("FEEDSUMMARIZER_SMTP_RECIPIENT") or ""
 default['preset'] = os.environ.get("FEEDSUMMARIZER_PRESET") or "Divine Intellect"
+default['instruct_template'] = os.environ.get("FEEDSUMMARIZER_INSTRUCT_TEMPLATE") or ""
 default['model'] = (os.environ.get("FEEDSUMMARIZER_MODEL") or "n")
 default['system'] = os.environ.get("FEEDSUMMARIZER_SYSTEM") or "You are an expert summarizer."
 default['instruction'] = os.environ.get("FEEDSUMMARIZER_INSTRUCTION") or "Summarize this article"
@@ -136,7 +137,9 @@ def generate_ai_response(chat_history, prompt, settings):
         data = {
             'stream': False,
             'messages': messages,
-            'max_tokens': 2000,
+            'max_tokens': 4096,
+            'mode': 'instruct',
+            'instruction_template': settings['instruct_template'],
         }
         response = requests.post(settings['url'] + "/chat/completions", headers=settings['headers'], json=data, verify=True)
         assistant_message = response.json()['choices'][0]['message']['content']
@@ -162,6 +165,7 @@ def initialize_settings(default):
     else:
         settings['model'] = "n"
     settings['mode'] = str(default['mode'])
+    settings['instruct_template'] = str(default['instruct_template'])
     settings['system'] = str(default['system'])
     settings['preset'] = str(default['preset'])
     settings['instruction'] = str(default['instruction'])
